@@ -21,7 +21,12 @@ help:
 	@echo ""
 	
 
-init:
+environment.yml: 
+	conda env export --from-history > environment.yml
+	cat environment.yml | sed '1d' | sed '$$d' > iron.yml
+	mv iron.yml environment.yml
+
+init:	environment.yml
 	conda env create --prefix ./envs --file environment.yml
 
 docs:
